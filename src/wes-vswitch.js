@@ -1,10 +1,11 @@
 module.exports = function(RED) {
+
+	const WesClient = require('./wes-client.js');
 	
 	function WesVSwitch(config) {
         RED.nodes.createNode(this, config);
 		
 		this.server = RED.nodes.getNode(config.server);
-        const WesClient = require('./wes-client.js');
 		
 		// Store the node instance for later use
         const node = this;

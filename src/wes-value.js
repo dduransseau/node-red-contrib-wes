@@ -1,11 +1,12 @@
 module.exports = function(RED) {
-	
-	function WesCommandRequest(config) {
+
+	const WesClient = require('./wes-client.js');
+	const SERVICES = require('../values.json');
+
+	function WesValueRequest(config) {
         RED.nodes.createNode(this, config);
 		
 		this.server = RED.nodes.getNode(config.server);
-		const WesClient = require('./wes-client.js');
-		const SERVICES = require('./values.json');
         const node = this;
 		node.services = this.server.services;
 		const command = config.value;
@@ -28,5 +29,6 @@ module.exports = function(RED) {
 			done();	
         });
     }
-	RED.nodes.registerType("wes-value", WesCommandRequest);
+
+	RED.nodes.registerType("wes-value", WesValueRequest);
 }
