@@ -1,0 +1,66 @@
+<script type="text/javascript">
+    RED.nodes.registerType('wes-relay', {
+        category: 'WES',
+        label: function() {
+			return this.name||"WES relay";
+		},
+		paletteLabel: "relay",
+        defaults: {
+            server: { value:"", required:true, type:"wes-server"},
+			number: { value:1, validate:RED.validators.number() },
+			action: { value:"toggle"},
+			name: {value:""}
+        },
+		inputs: 1,
+        outputs: 1,
+		color: "#78bd83",
+        icon: "font-awesome/fa-microchip",
+		oneditprepare: function() {
+			$("#node-input-action").typedInput({
+				types: [
+					{
+						value: "toggle",
+						options: [
+							{ value: "toggle", label: "Toggle"},
+							{ value: "on", label: "On"},
+							{ value: "off", label: "Off"},
+						]
+					}
+				]
+			})
+		}
+    });
+</script>
+
+<script type="text/html" data-template-name="wes-relay">
+    <div class="form-row">
+        <i class="fa fa-server"></i> <label for="node-config-input-server">Server Address</label>
+        <input id="node-input-server" ng-model="node.server">
+    </div>
+	<div class="form-row">
+        <label for="node-input-number">Number</label>
+        <input type="number" id="node-input-number">
+    </div>
+	<div class="form-row">
+        <label for="node-input-action">Action</label>
+        <input type="text" id="node-input-action">
+    </div>
+	<div class="form-row">
+        <i class="fa fa-tag"></i> <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/markdown" data-help-name="wes-relay">
+Execute l'action choisie sur le relai selectionné
+
+### Inputs
+
+: payload (string) :  trigger pour l'execution de la commande.
+
+
+### Outputs
+
+1. Standard output
+: payload (string) : resultat de la commande renvoyé par le WES.
+</script>

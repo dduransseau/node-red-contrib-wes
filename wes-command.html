@@ -1,0 +1,41 @@
+<script type="text/javascript">
+    RED.nodes.registerType('wes-command', {
+        category: 'WES',
+        label: function() {
+			return this.name||"WES command";
+		},
+		paletteLabel: "command",
+        defaults: {
+            server: { value:"", type:"wes-server"},
+			name: {value:""}
+        },
+		inputs: 1,
+        outputs: 1,
+		color: "#78bd83",
+        icon: "font-awesome/fa-microchip"
+    });
+</script>
+
+<script type="text/html" data-template-name="wes-command">
+    <div class="form-row">
+        <i class="fa fa-server"></i> <label for="node-config-input-server">Server Address</label>
+        <input id="node-input-server" ng-model="node.server">
+    </div>
+	<div class="form-row">
+        <i class="fa fa-tag"></i> <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/markdown" data-help-name="wes-command">
+Execute une commande reçue en message et retourne le resultat
+
+### Inputs
+
+: payload (string) :  commande à executer par le WES.
+
+
+### Outputs
+
+: payload (string) : resultat de la commande renvoyé par le WES.
+</script>

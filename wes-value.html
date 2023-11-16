@@ -1,0 +1,176 @@
+<script type="text/javascript">
+
+    // function buildEditSelecValues (node){
+    //     const v = Object.keys(node.SERVICES.values).map(key => ({
+    //         value: key,
+    //         label: node.SERVICES.values[key].label
+    //     }));
+    //     node.log(v);
+    //     return v;
+    // }
+
+    RED.nodes.registerType('wes-value', {
+        category: 'WES',
+        label: function() {
+			return this.name||"WES value";
+		},
+		paletteLabel: "value",
+        defaults: {
+            server: { value:"", required:true, type:"wes-server"},
+			value: { required:true},
+			name: {value:""}
+        },
+		inputs: 1,
+        outputs: 1,
+		color: "#78bd83",
+        icon: "font-awesome/fa-microchip",
+        oneditprepare: function() {
+			$("#node-input-value").typedInput({
+				types: [
+					{
+						value: "gI000",
+						options: 
+                        [
+							{ value: "gI000", label: "adresse MAC"},
+							{ value: "gI001", label: "heure"},
+							{ value: "gI002", label: "date"},
+							{ value: "gI003", label: "firmware"},
+							{ value: "gR001", label: "relai 1"},
+							{ value: "gR002", label: "relai 2"},
+							{ value: "gE001", label: "entrée 1"},
+							{ value: "gE002", label: "entrée 2"},
+							{ value: "gE011", label: "entrée analogique 1"},
+							{ value: "gE012", label: "entrée analogique 2"},
+							{ value: "gE013", label: "entrée analogique 3"},
+							{ value: "gE014", label: "entrée analogique 4"},
+							{ value: "gA100", label: "puissance apparente pince 1"},
+							{ value: "gA101", label: "intensité pince 1"},
+							{ value: "gA200", label: "puissance apparente pince 2"},
+							{ value: "gA201", label: "intensité pince 2"},
+							{ value: "gP101", label: "débit compteur impulsion 1"},
+							{ value: "gP201", label: "débit compteur impulsion 2"},
+							{ value: "gP102", label: "index compteur impulsion 1"},
+							{ value: "gP202", label: "index compteur impulsion 2"},
+							{ value: "gT100", label: "puissance apparente téléinfo 1"},
+							{ value: "gT101", label: "intensité phase 1 téléinfo 1"},
+							{ value: "gT102", label: "intensité phase 2 téléinfo 1"},
+							{ value: "gT103", label: "intensité phase 3 téléinfo 1"},
+							{ value: "gT104", label: "intensité max phase 1 téléinfo 1"},
+							{ value: "gT105", label: "intensité max phase 2 téléinfo 1"},
+							{ value: "gT106", label: "intensité max phase 3 téléinfo 1"},
+							{ value: "gT110", label: "index 1 téléinfo 1"},
+							{ value: "gT111", label: "index 2 téléinfo 1"},
+							{ value: "gT112", label: "index 3 téléinfo 1"},
+							{ value: "gT113", label: "index 4 téléinfo 1"},
+							{ value: "gT114", label: "index 5 téléinfo 1"},
+							{ value: "gT115", label: "index 6 téléinfo 1"},
+							{ value: "gT116", label: "période en cours téléinfo 1"},
+							{ value: "gT117", label: "couleur demain téléinfo 1"},
+							{ value: "gT120", label: "conso journée (kWh) téléinfo 1"},
+							{ value: "gT121", label: "coût journée (€) téléinfo 1"},
+							{ value: "gT200", label: "puissance apparente téléinfo 2"},
+							{ value: "gT201", label: "intensité phase 1 téléinfo 2"},
+							{ value: "gT202", label: "intensité phase 2 téléinfo 2"},
+							{ value: "gT203", label: "intensité phase 3 téléinfo 2"},
+							{ value: "gT204", label: "intensité max phase 1 téléinfo 2"},
+							{ value: "gT205", label: "intensité max phase 2 téléinfo 2"},
+							{ value: "gT206", label: "intensité max phase 3 téléinfo 2"},
+							{ value: "gT210", label: "index 1 téléinfo 2"},
+							{ value: "gT211", label: "index 2 téléinfo 2"},
+							{ value: "gT212", label: "index 3 téléinfo 2"},
+							{ value: "gT213", label: "index 4 téléinfo 2"},
+							{ value: "gT214", label: "index 5 téléinfo 2"},
+							{ value: "gT215", label: "index 6 téléinfo 2"},
+							{ value: "gT216", label: "période en cours téléinfo 2"},
+							{ value: "gT217", label: "couleur demain téléinfo 2"},
+							{ value: "gT220", label: "conso journée (kWh) téléinfo 2"},
+							{ value: "gT221", label: "coût journée (€) téléinfo 2"},
+							{ value: "gV001", label: "switch virtuel 1"},
+							{ value: "gV002", label: "switch virtuel 2"},
+							{ value: "gV003", label: "switch virtuel 3"},
+							{ value: "gV004", label: "switch virtuel 4"},
+							{ value: "gV005", label: "switch virtuel 5"},
+							{ value: "gV006", label: "switch virtuel 6"},
+							{ value: "gV007", label: "switch virtuel 7"},
+							{ value: "gV008", label: "switch virtuel 8"},
+							{ value: "gV009", label: "switch virtuel 9"},
+							{ value: "gV0010", label: "switch virtuel 10"},
+							{ value: "gV0011", label: "switch virtuel 11"},
+							{ value: "gV0012", label: "switch virtuel 12"},
+							{ value: "gV0013", label: "switch virtuel 13"},
+							{ value: "gV0014", label: "switch virtuel 14"},
+							{ value: "gV0015", label: "switch virtuel 15"},
+							{ value: "gV0016", label: "switch virtuel 16"},
+							{ value: "gV0017", label: "switch virtuel 17"},
+							{ value: "gV0018", label: "switch virtuel 18"},
+							{ value: "gV0019", label: "switch virtuel 19"},
+							{ value: "gV0020", label: "switch virtuel 20"},
+							{ value: "gV0021", label: "switch virtuel 21"},
+							{ value: "gV0022", label: "switch virtuel 22"},
+							{ value: "gV0023", label: "switch virtuel 23"},
+							{ value: "gV0024", label: "switch virtuel 24"},
+							{ value: "gW001", label: "sonde 1wire 1"},
+							{ value: "gW002", label: "sonde 1wire 2"},
+							{ value: "gW003", label: "sonde 1wire 3"},
+							{ value: "gW004", label: "sonde 1wire 4"},
+							{ value: "gW005", label: "sonde 1wire 5"},
+							{ value: "gW006", label: "sonde 1wire 6"},
+							{ value: "gW007", label: "sonde 1wire 7"},
+							{ value: "gW008", label: "sonde 1wire 8"},
+							{ value: "gW009", label: "sonde 1wire 9"},
+							{ value: "gW0010", label: "sonde 1wire 10"},
+							{ value: "gW0011", label: "sonde 1wire 11"},
+							{ value: "gW0012", label: "sonde 1wire 12"},
+							{ value: "gW0013", label: "sonde 1wire 13"},
+							{ value: "gW0014", label: "sonde 1wire 14"},
+							{ value: "gW0015", label: "sonde 1wire 15"},
+							{ value: "gW0016", label: "sonde 1wire 16"},
+							{ value: "gW0017", label: "sonde 1wire 17"},
+							{ value: "gW0018", label: "sonde 1wire 18"},
+							{ value: "gW0019", label: "sonde 1wire 19"},
+							{ value: "gW0020", label: "sonde 1wire 20"},
+							{ value: "gW0021", label: "sonde 1wire 21"},
+							{ value: "gW0022", label: "sonde 1wire 22"},
+							{ value: "gW0023", label: "sonde 1wire 23"},
+							{ value: "gW0024", label: "sonde 1wire 24"},
+							{ value: "gW0025", label: "sonde 1wire 25"},
+							{ value: "gW0026", label: "sonde 1wire 26"},
+							{ value: "gW0027", label: "sonde 1wire 27"},
+							{ value: "gW0028", label: "sonde 1wire 28"},
+							{ value: "gW0029", label: "sonde 1wire 29"},
+							{ value: "gW0030", label: "sonde 1wire 30"}
+						]
+					}
+				]
+			})
+		}
+    });
+</script>
+
+<script type="text/html" data-template-name="wes-value">
+    <div class="form-row">
+        <i class="fa fa-server"></i> <label for="node-config-input-server">Server Address</label>
+        <input id="node-input-server" ng-model="node.server">
+    </div>
+	<div class="form-row">
+        <i class="fa fa-circle-o"></i> <label for="node-input-value">Value</label>
+        <input type="text" id="node-input-value">
+    </div>
+	<div class="form-row">
+        <i class="fa fa-tag"></i> <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/markdown" data-help-name="wes-value">
+Récupère la valeur de la métrique selectionnée et renvoi son resultat
+
+### Inputs
+
+: payload (string) :  trigger pour l'execution de la commande.
+
+
+### Outputs
+
+: payload (object) : resultat de la commande renvoyé par le WES, sous la forme d'object avec les clés value, label et command
+</script>

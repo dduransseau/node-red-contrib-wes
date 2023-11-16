@@ -1,0 +1,17 @@
+{
+  "name": "@dduransseau/node-red-contrib-wes",
+  "version": "0.1.0",
+  "description": "Intégration du W.E.S de cartelectronic (Web Energie Superviseur)",
+  "author": "Damien Duransseau <damien@duransseau.net>",
+  "license": "MIT",
+  "node-red" : {
+		"version": ">=2.1.0",
+		"nodes": {
+			"wes-value": "wes-value.js",
+			"wes-command-request": "wes-command.js",
+			"wes-server": "wes-server.js",
+			"wes-relay": "wes-relay.js",
+			"wes-vswitch": "wes-vswitch.js"      
+		}
+    }
+}
